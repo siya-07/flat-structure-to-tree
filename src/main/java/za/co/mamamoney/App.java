@@ -26,8 +26,8 @@ public class App
 			}
 		};
 
-		ArrayList<Node> tree = buildTree(nodes);
-		printTree(tree);
+		
+		printTree(nodes);
 	}
 	
 	static ArrayList<Node> buildTree(ArrayList<Node> nodes) {
@@ -68,6 +68,7 @@ public class App
 	}
 	
 	static void printTree(ArrayList<Node> nodes) {
-		printTree(nodes,0);
+		ArrayList<Node> tree = buildTree(nodes);
+		printTree(tree,0);
 	}
 }
