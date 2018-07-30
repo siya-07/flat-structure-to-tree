@@ -31,26 +31,26 @@ public class App
 	}
 	
 	static ArrayList<Node> buildTree(ArrayList<Node> nodes) {
-		Map<Long, Node> mapTmp = new HashMap<>();
+		Map<Long, Node> map = new HashMap<>();
 		for (Node current : nodes)
-			mapTmp.put(current.getId(), current);
+			map.put(current.getId(), current);
 		
         for (Integer i = nodes.size()-1;i>=0;i--) {
             Long parentId = nodes.get(i).getParentId();
  
             if (parentId != 0) {
-                Node parent = mapTmp.get(parentId);
+                Node parent = map.get(parentId);
                 if (parent != null) {
                 	nodes.get(i).setParent(parent);
                     parent.addChild(nodes.get(i));
-                    mapTmp.put(parentId, parent);
-                    mapTmp.put(nodes.get(i).getId(), nodes.get(i));
+                    map.put(parentId, parent);
+                    map.put(nodes.get(i).getId(), nodes.get(i));
                 }
                 
                 nodes.remove(nodes.get(i));
             }
         }
-        
+        map = null;
 		return nodes;
 	}
 
@@ -59,11 +59,8 @@ public class App
 			for(int i=0;i<generation;i++)
 				System.out.print("  ");
 			System.out.println(n);
-			if(n.getChildren() == null) {
-				continue;
-			} else {				
+			if(n.getChildren() != null)
 				printTree(n.getChildren(),generation+1);
-			}
 		}
 	}
 	
